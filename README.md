@@ -17,17 +17,17 @@ With the datasets in place, you’re ready to build your RealKcat predictor. We�
 
 ---
 
-### 3. 🔍 Running Inference Like a Pro
+
+### 3. 🎉 Download Pre-trained Models
+Prefer to dive straight into predictions? Download our pre-trained models here: [Download RealKcat Models](https://chowdhurylab.github.io/downloads.html). This allows you to skip the training phase and go directly to inference.
+
+---
+### 4. 🔍 Running Inference Like a Pro
 Our **inference code** enables you to easily input sequences and substrates for prediction. You can input:
 - **A single sequence and substrate** for a quick, focused prediction.
 - **A batch of sequences and substrates** for high-throughput predictions.
 
 Whether analyzing a single enzyme or an entire library, our inference script handles it all. Just plug in your data and let RealKcat generate precise predictions.
-
----
-
-### 4. 🎉 Download Pre-trained Models
-Prefer to dive straight into predictions? Download our pre-trained models here: [Download RealKcat Models](https://chowdhurylab.github.io/downloads.html). This allows you to skip the training phase and go directly to inference.
 
 ---
 
