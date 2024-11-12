@@ -1,6 +1,6 @@
 # Reproducing RealKcat Results
 
-Welcome to the RealKcat reproduction guide! Here, you'll find everything you need to recreate our enzyme kinetics predictions for \( k_{\text{cat}} \) and \( K_M \) values. Let’s get started!
+Welcome to the RealKcat reproduction guide! Here, you'll find everything you need to recreate our enzyme kinetics predictions for \( k_cat \) and \( K_M \) values. Let’s get started!
 
 ---
 
@@ -12,7 +12,7 @@ To begin, go to [https://chowdhurylab.github.io/downloads.html](https://chowdhur
 ### 2. 🚀 Training the Model
 With the datasets in place, you’re ready to build your RealKcat predictor. We’ve split the training process for both \( k_{\text{cat}} \) and \( K_M \) predictions:
 
-- **For \( k_{\text{cat}} \) Predictions**: Use the `RealKcat_kcat_train` script to train an XGBoost model specifically for accurate \( k_{\text{cat}} \) predictions.
+- **For \( k_cat \) Predictions**: Use the `RealKcat_kcat_train` script to train an XGBoost model specifically for accurate \( k_{\text{cat}} \) predictions.
 - **For \( K_M \) Predictions**: Use the `RealKcat_km_train` script. It shares the same model architecture but is optimized to predict \( K_M \) values, providing a consistent framework for both kinetic parameters.
 
 ---
