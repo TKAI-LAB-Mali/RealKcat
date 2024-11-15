@@ -2,7 +2,8 @@
 
 ## Overview
 
-The `RealKcat` repository provides tools and scripts to train and evaluate machine learning models for predicting enzyme kinetic parameters, specifically \( k_{cat} \) and \( K_M \), using various datasets. This repository is structured to include training and inference scripts for both `kcat` and `km` models, as well as utilities for data processing, model training, and standardized prediction.
+Welcome to the RealKcat reproduction guide! Here, you'll find everything you need to recreate our enzyme kinetics predictions for \( k_{\text{cat}} \) and \( K_M \), using our curated dataset. 
+This repository is structured to include training and inference scripts for both `kcat` and `km` models, as well as utilities for data processing, model training, and standardized prediction.
 
 ## 📂 Download and Setup the Datasets
 
