@@ -111,7 +111,7 @@ RealKcat/
 To set up your environment, clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/RealKcat.git
+git clone https://github.com/TKAI-LAB-Mali/RealKcat
 cd RealKcat
 pip install -r requirements.txt
 ```
@@ -168,9 +168,10 @@ python scripts/test_PafA_kcat_predict.py
 python scripts/test_PafA_km_predict.py
 ```
 
-### 3. Running Inference on Jupyter Notebook
+**### 3. Running Inference on Jupyter Notebook
 
-For interactive analysis, use `RealKcat_Inference.ipynb` to explore and visualize predictions for `kcat` and `km`.
+For interactive analysis, use `RealKcat_Inference.ipynb` to explore and make predictions for `kcat` and `km`, using enzyme sequence and substrate Isomeric SMILES.**
+
 
 ## Data Processing and Utilities
 
