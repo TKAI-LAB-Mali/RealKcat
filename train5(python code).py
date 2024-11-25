@@ -17,9 +17,9 @@ kmeans = KMeans(n_clusters=5, random_state=42)
 df['cluster'] = kmeans.fit_predict(df[['kcat']])
 
 # Load ESM-2 model and tokenizer
-model_name = "Rostlab/prot_bert"
+model_name = "facebook/esm2_t33_650M_UR50D"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-prot_bert_model = AutoModel.from_pretrained(model_name)
+esm_model = AutoModel.from_pretrained(model_name)
 
 # Generate ESM-2 embeddings
 def get_esm_embedding(sequence):
@@ -28,14 +28,7 @@ def get_esm_embedding(sequence):
         outputs = esm_model(**inputs)
     return outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
 
-# Generate ProtBERT embeddings
-def get_prot_bert_embedding(sequence):
-    inputs = tokenizer(sequence, return_tensors="pt", padding=True, truncation=True, max_length=1024)
-    with torch.no_grad():
-        outputs = prot_bert_model(**inputs)
-    return outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
-
-df['embedding'] = df['sequence'].apply(get_prot_bert_embedding)
+df['embedding'] = df['sequence'].apply(get_esm_embedding)
 
 # Prepare data for training
 X = np.stack(df['embedding'].values)
@@ -76,16 +69,18 @@ optimizer = optim.Adam(model.parameters())
 # Training loop
 num_epochs = 50000
 batch_size = 8
+device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
 
 for epoch in range(num_epochs):
+    model.to(device)
     model.train()
     total_loss = 0
     correct_predictions = 0
     total_predictions = 0
 
     for i in range(0, len(X_train), batch_size):
-        batch_X = torch.FloatTensor(X_train[i:i+batch_size])
-        batch_y = torch.LongTensor(y_train[i:i+batch_size])
+        batch_X = torch.FloatTensor(X_train[i:i+batch_size]).to(device)
+        batch_y = torch.LongTensor(y_train[i:i+batch_size]).to(device)
 
         optimizer.zero_grad()
         outputs = model(batch_X)
