@@ -1,27 +1,40 @@
-# RealKcat Repository
+# RealKcat: Robust Prediction of Enzyme Variant Kinetics
 
 ## Overview
+Welcome to the RealKcat repository! This project provides a reproducible pipeline to predict enzyme kinetics parameters, specifically `kcat` and `km`, using curated datasets. The repository includes tools and scripts for training and inference of both `kcat` and `km` models, along with utilities for data processing, model training, and standardized prediction.
 
-The `RealKcat` repository provides tools and scripts to train and evaluate machine learning models for predicting enzyme kinetic parameters, specifically \( k_{cat} \) and \( K_M \), using various datasets. This repository is structured to include training and inference scripts for both `kcat` and `km` models, as well as utilities for data processing, model training, and standardized prediction.
+---
+## **Quick Inference with Pretrained Model:**  
+For a hands-on demonstration and interactive inference, use our [`RealKcat_Inference_Interface.ipynb`](https://colab.research.google.com/drive/1z8cPg2J-EF01rd0yl7fgGlvWDohOj5m0?usp=sharing) notebook. Open it directly in Google Colab:
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-btn.svg)](https://colab.research.google.com/drive/1z8cPg2J-EF01rd0yl7fgGlvWDohOj5m0?usp=sharing)
+
+This notebook allows you to perform inference on `kcat` and `km` predictions without needing to install or configure anything locally. Simply connect to a Colab runtime, follow the provided instructions, and start exploring the RealKcat models interactively.
+
+If you only want to make predictions with the pretrained model locally without retraining, you can use the **RealKcat_Inference.ipynb** notebook. This notebook offers an easy, interactive way to explore and make predictions for `kcat` and `km` values. Just provide your enzyme sequence and substrate Isomeric SMILES, and the notebook will guide you through the prediction process.
+
+---
+
+## Retraining the Models
+
+If you’re interested in retraining the models and reproducing the results from scratch, please follow the steps below to download and set up the required datasets.
 
 ## 📂 Download and Setup the Datasets
 
-To retrain and reproduce results, please follow these steps to download and set up the required datasets correctly within the repository's `data` folder:
+Follow these steps to download and correctly set up the datasets in the repository's `data` folder:
 
 1. **Download the Dataset**:
-   - Visit [https://chowdhurylab.github.io/downloads.html](https://chowdhurylab.github.io/downloads.html).
-   - Locate **KinHub-27k (Manually-curated Enzyme Parameter Database; verified from 2158 papers)** and download the file (e.g., `KinHub-27k.zip`).
+   - Visit [Chowdhury Lab Downloads](https://chowdhurylab.github.io/downloads.html).
+   - Locate **KinHub-27k (Manually-curated Enzyme Parameter Database; verified from 2158 papers)** and download the dataset file (e.g., `KinHub-27k.zip`).
 
 2. **Move the Downloaded File**:
-   - Once downloaded, move the `KinHub-27k.zip` file to the `data` folder in the root directory of this repository.
+   - Move `KinHub-27k.zip` to the `data` folder in the root directory of this repository.
 
 3. **Extract the Files into the `data` Directory**:
-   - Open a terminal or command prompt.
-   - Navigate to the `data` directory:
+   - Open a terminal or command prompt, navigate to the `data` directory, and unzip the dataset:
      ```bash
      cd path/to/RealKcat/data
      ```
-   - Unzip the dataset:
      - **On Linux/macOS**:
        ```bash
        unzip KinHub-27k.zip
@@ -30,10 +43,10 @@ To retrain and reproduce results, please follow these steps to download and set 
        ```bash
        tar -xf KinHub-27k.zip
        ```
-     - Alternatively, on Windows, right-click `KinHub-27k.zip` and choose "Extract All..." to unzip directly into the `data` folder.
+     - Alternatively, on Windows, you can right-click `KinHub-27k.zip` and choose "Extract All..." to unzip directly into the `data` folder.
 
 4. **Verify the Extracted Files**:
-   - After extraction, ensure your `data` folder has the following structure:
+   - After extraction, your `data` folder should have the following structure:
 
      ```
      data/
@@ -45,12 +58,12 @@ To retrain and reproduce results, please follow these steps to download and set 
      ├── WT_MD_dataset_wNeg.pt
      ```
 
-   - Confirm that all files and folders are present as shown above for the scripts to access the data properly.
-
 5. **Proceed with Training or Inference**:
-   - Once the data is correctly set up, use the provided scripts to perform training and inference.
+   - With the data set up, you can now use the provided scripts to perform training or inference.
 
-## Your Folder RealKcat should have this structure:
+## Repository Structure
+
+The `RealKcat` directory should be organized as follows:
 
 ```plaintext
 RealKcat/
@@ -103,7 +116,7 @@ RealKcat/
 
 ### Prerequisites
 
-- Python 3.8 or higher (codes are compatible with Python 3.12)
+- Python 3.8 or higher (code is compatible with Python 3.12)
 - Required libraries are listed in `requirements.txt`.
 
 ### Install Dependencies
@@ -111,24 +124,16 @@ RealKcat/
 To set up your environment, clone the repository and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/RealKcat.git
+git clone https://github.com/TKAI-LAB-Mali/RealKcat
 cd RealKcat
 pip install -r requirements.txt
 ```
-
-### Requirements
-
-- `torch`: For handling tensor operations and GPU compatibility.
-- `xgboost`: For model training.
-- `pandas`, `numpy`: For data manipulation.
-- `scikit-learn`: For metrics and utilities.
-- `matplotlib`: For plotting results.
 
 ## Usage
 
 ### 1. Training Models
 
-To train models for `kcat` and `km` using XGBoost:
+To train models for `kcat` and `km`:
 
 ```bash
 # Train kcat model
@@ -138,7 +143,7 @@ python scripts/train_kcat_model.py
 python scripts/train_km_model.py
 ```
 
-The scripts load datasets, apply global standardization, calculate class weights to handle imbalances, and train models with specific hyperparameters.
+These scripts load datasets, standardize them, and train models with specified hyperparameters.
 
 ### 2. Running Inference
 
@@ -168,52 +173,7 @@ python scripts/test_PafA_kcat_predict.py
 python scripts/test_PafA_km_predict.py
 ```
 
-### 3. Running Inference on Jupyter Notebook
-
-For interactive analysis, use `RealKcat_Inference.ipynb` to explore and visualize predictions for `kcat` and `km`.
-
-## Data Processing and Utilities
-
-- **data_processing.py**: Functions for loading datasets, standardizing data, and creating custom datasets using PyTorch `TensorDataset`.
-  - **Functions**:
-    - `apply_global_standardization_separate()`: Applies global standardization using predefined means and standard deviations.
-    - `get_train_stats_separate()`: Calculates global mean and standard deviation for each feature group.
-
-- **evaluation.py**: Functions for evaluating model predictions.
-  - **Functions**:
-    - `evaluate_model()`: Computes metrics like accuracy, precision, recall, F1-score, and MCC.
-    - `plot_confusion_matrix()`: Generates and saves confusion matrices for visual evaluation.
-
-- **model_training.py**: Functions for initializing and training models.
-  - **Functions**:
-    - `initialize_model()`: Sets up an XGBoost model with specified parameters.
-    - `calculate_class_weights()`: Computes class weights for balanced training.
-    - `train_model()`: Trains and saves the model with training and validation datasets.
-
-- **utils.py**: Utility functions.
-  - **Functions**:
-    - `check_device()`: Checks and returns the available device (CPU or GPU).
-    - `set_seed()`: Sets seeds for reproducibility.
-
-## Examples
-
-### Example: Training a `kcat` Model
-
-```bash
-python scripts/train_kcat_model.py
-```
-
-### Example: Running Inference on `kcat` for OOD and PafA Datasets
-
-```bash
-# Run OOD inference for kcat
-python scripts/test_ood_kcat_predict.py
-
-# Run PafA inference for kcat
-python scripts/test_PafA_kcat_predict.py
-```
-
-## Results and Visualization
+### 3. Results and Visualization
 
 Model outputs, trained models, and prediction results are saved as figures in the `outputs/` directory.
 
@@ -223,4 +183,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes. 
