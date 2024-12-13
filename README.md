@@ -7,7 +7,7 @@ Welcome to the RealKcat repository! This project provides a reproducible pipelin
 ## **Quick Inference with Pretrained Model:**  
 For a hands-on demonstration and interactive inference, use our [`RealKcat_Inference_Interface.ipynb`](https://colab.research.google.com/drive/1z8cPg2J-EF01rd0yl7fgGlvWDohOj5m0?usp=sharing) notebook. Open it directly in Google Colab:
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-btn.svg)](https://colab.research.google.com/drive/1z8cPg2J-EF01rd0yl7fgGlvWDohOj5m0?usp=sharing)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1z8cPg2J-EF01rd0yl7fgGlvWDohOj5m0?usp=sharing)
 
 This notebook allows you to perform inference on `kcat` and `km` predictions without needing to install or configure anything locally. Simply connect to a Colab runtime, follow the provided instructions, and start exploring the RealKcat models interactively.
 
